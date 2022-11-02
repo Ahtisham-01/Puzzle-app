@@ -48,7 +48,7 @@ function App() {
   };
   return (
     <div className="w-full p-7  h-screen ">
-      <div className="w-full h-full p-4 border border-zinc-300 bg-zinc-100 rounded-md">
+      <div className="w-full h-full p-4 border border-zinc-300 bg-zinc-50 rounded-md">
 	  <img className='flex justify-center items-center w-12 h-12 rounded-md' src='https://tuk-cdn.s3.amazonaws.com/can-uploader/IMG-20220812-WA0006.jpg' />
         <div className="w-full flex justify-center">
           <label className="font-extrabold text-4xl px-4  shadow-xl mr-2 py-4 text-zinc-900">
