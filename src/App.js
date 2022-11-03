@@ -47,16 +47,16 @@ function App() {
     );
   };
   return (
-    <div className="w-full p-7  h-screen ">
-      <div className="w-full h-full p-4 border border-zinc-300 bg-zinc-50 rounded-md">
-	  <img className='flex justify-center items-center w-12 h-12 rounded-md' src='https://tuk-cdn.s3.amazonaws.com/can-uploader/IMG-20220812-WA0006.jpg' />
+    <div className="w-full p-7  h-screen mb-[56px] ">
+      <div className="w-full  p-4  border border-zinc-300 bg-zinc-50 rounded-md">
+	  <img className='flex justify-center items-center w-54 object-cover h-24 rounded-md' src='https://tuk-cdn.s3.amazonaws.com/can-uploader/Screenshot_2022-11-03_011620-removebg-preview.png' />
         <div className="w-full flex justify-center">
           <label className="font-extrabold text-4xl px-4  shadow-xl mr-2 py-4 text-zinc-900">
             PUZZLE APP
           </label>
         </div>
 
-        <div className="p-3 w-full flex justify-center items-center ">
+        <div className="p-3 w-full mt-8 flex justify-center items-center ">
           <form
             onSubmit={(e) => {
               localStorage.clear();
@@ -84,7 +84,7 @@ function App() {
         <br />
         <Modal modalState={modalStateHandler} state={modalState} />
 
-        <div className="">{getGrid()}</div>
+        <div className="h-full">{getGrid()}</div>
       </div>
     </div>
   );

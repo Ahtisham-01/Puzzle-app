@@ -14,7 +14,7 @@ const Grid = ({ puzzleSize, gameCompleted }) => {
 
 	// Get Boxes from localStorage
 	const getBoxes = () => {
-		return {puzzleSize}
+		return JSON.parse(localStorage.getItem("boxes"))
 	};
 
 	// Funtion to Shuffle The items using math.random
@@ -26,7 +26,7 @@ const Grid = ({ puzzleSize, gameCompleted }) => {
 				new_arr.push(random_item);
 			}
 		}
-		// storeBoxes(new_arr);
+		storeBoxes(new_arr);
 		return new_arr;
 	};
 	// calls Shuffle the initial value of the boxes which are linear
@@ -58,7 +58,7 @@ const Grid = ({ puzzleSize, gameCompleted }) => {
 			});
 
 			if (compLoop) {
-				// storeBoxes([]);
+				storeBoxes([]);
 				setCompleted(compLoop);
 				gameCompleted(completed);
 			}
@@ -82,7 +82,7 @@ const Grid = ({ puzzleSize, gameCompleted }) => {
 			swapArrayElements(boxes_new, fromBoxIndex, toBoxIndex);
 			setPuzzleGrid([...boxes_new]);
 			// Check boxes
-			// storeBoxes(boxes_new);
+			storeBoxes(boxes_new);
 			checkCompleted();
 		};
 	
@@ -109,14 +109,14 @@ const Grid = ({ puzzleSize, gameCompleted }) => {
 					onDragOver={(event) => {
 						event.preventDefault();
 						event.target.classList.add("starter");
-						document.querySelectorAll(`.dropzones`).forEach((e) => {
+						document.querySelectorAll(`.dropzonesAll`).forEach((e) => {
 							e.classList.add("bg-zinc-300");
 							e.classList.add("border-green-400");
 							e.classList.remove("bg-zinc-900");
 						});
 						document.body.classList.add("opacity-50");
 					}}
-					className={`dropzones rounded-lg bg-zinc-900  hover:bg-zinc-300 hover:text-zinc-900 border-4 hover:border-zinc-400 cursor-move shadow-2xl z-10 relative h-32 w-32   flex flex-col justify-evenly text-center mt-50px text-white align-middle`}
+					className={`dropzonesAll rounded-lg bg-zinc-900  hover:bg-zinc-300 hover:text-zinc-900 border-4 hover:border-zinc-400 cursor-move shadow-2xl z-10 relative h-32 w-32   flex flex-col justify-evenly text-center mt-50px text-white align-middle`}
 					key={e.id}
 				>
 					<p className="align-middle -z-1 relative inline font-semibold text-4xl oldstyle-nums ">
