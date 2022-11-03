@@ -47,7 +47,7 @@ function App() {
     );
   };
   return (
-    <div className="w-full p-7  h-screen mb-[56px] ">
+    <div className="w-full p-7  h-screen  ">
       <div className="w-full  p-4  border border-zinc-300 bg-zinc-50 rounded-md">
 	  <img className='flex justify-center items-center w-54 object-cover h-24 rounded-md' src='https://tuk-cdn.s3.amazonaws.com/can-uploader/Screenshot_2022-11-03_011620-removebg-preview.png' />
         <div className="w-full flex justify-center">
