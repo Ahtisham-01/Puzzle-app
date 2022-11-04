@@ -1,13 +1,29 @@
 import { useEffect, useRef, useState } from "react";
+import Modal from "./Modal";
 
 export default function PuzzleImage() {
-    const [value, setValue] = useState("");
+    //Set value for input field
+    const [value, setValue] = useState(null);
+    //Modal state to show when win
+    const [modalState, setModalState] = useState(false);
+    //modal Handler
+    const modalStateHandler = () => {
+        document.querySelector(".modal").classList.remove("flex");
+        document.querySelector(".modal").classList.add("hidden");
+        setModalState(false);
+        setValue(null);
+        document.getElementById("GridSize").value = "";
+    };
     useEffect(() => {
+        canvas();
+    }, [value]);
+    //creating canvas
+    const canvas = () => {
         const PUZZLE_HOVER_TINT = "#009900";
         const img = new Image();
         const canvas = document.querySelector("#canvas");
         const stage = canvas.getContext("2d");
-        let difficulty = 4;
+        let difficulty = value;
         let pieces;
         let piece;
         let puzzleWidth;
@@ -17,7 +33,7 @@ export default function PuzzleImage() {
         let currentPiece;
         let currentDropPiece;
         let mouse;
-        img.addEventListener("load", onImage, false);
+        img.addEventListener("load", onImage, true);
         img.src =
             "https://cdn.pixabay.com/photo/2022/10/09/02/16/haunted-house-7508035_960_720.jpg";
 
@@ -29,6 +45,26 @@ export default function PuzzleImage() {
             };
             currentPiece = null;
             currentDropPiece = null;
+            // stage.drawImage(
+            //     img,
+            //     0,
+            //     0,
+            //     puzzleWidth,
+            //     puzzleHeight,
+            //     0,
+            //     0,
+            //     puzzleWidth,
+            //     puzzleHeight
+            // );
+            // createTitle("Click to Start Puzzle");
+
+            buildPieces();
+        }
+        //canvas initial rebder
+        function setCanvas() {
+            canvas.width = puzzleWidth;
+            canvas.height = puzzleHeight;
+            canvas.style.border = "1px solid black";
             stage.drawImage(
                 img,
                 0,
@@ -40,16 +76,8 @@ export default function PuzzleImage() {
                 puzzleWidth,
                 puzzleHeight
             );
-            createTitle("Click to Start Puzzle");
-            buildPieces();
         }
-
-        function setCanvas() {
-            canvas.width = puzzleWidth;
-            canvas.height = puzzleHeight;
-            canvas.style.border = "1px solid black";
-        }
-
+        //image load handler based on grid size
         function onImage() {
             pieceWidth = Math.floor(img.width / difficulty);
             pieceHeight = Math.floor(img.height / difficulty);
@@ -58,19 +86,7 @@ export default function PuzzleImage() {
             setCanvas();
             initPuzzle();
         }
-
-        function createTitle(msg) {
-            stage.fillStyle = "#000000";
-            stage.globalAlpha = 0.4;
-            stage.fillRect(100, puzzleHeight - 40, puzzleWidth - 200, 40);
-            stage.fillStyle = "#FFFFFF";
-            stage.globalAlpha = 1;
-            stage.textAlign = "center";
-            stage.textBaseline = "middle";
-            stage.font = "20px Arial";
-            stage.fillText(msg, puzzleWidth / 2, puzzleHeight - 20);
-        }
-
+        //create pieces of tiles
         function buildPieces() {
             let i;
             let piece;
@@ -89,7 +105,7 @@ export default function PuzzleImage() {
             }
             document.onpointerdown = shufflePuzzle;
         }
-
+        //shuffle Grid pieces
         function shufflePuzzle() {
             pieces = shuffleArray(pieces);
             stage.clearRect(0, 0, puzzleWidth, puzzleHeight);
@@ -118,7 +134,7 @@ export default function PuzzleImage() {
             }
             document.onpointerdown = onPuzzleClick;
         }
-
+        //check the piece is draged or not
         function checkPieceClicked() {
             for (const piece of pieces) {
                 if (
@@ -134,7 +150,7 @@ export default function PuzzleImage() {
             }
             return null;
         }
-
+        //on refresh update puzzle
         function updatePuzzle(e) {
             currentDropPiece = null;
             if (e.layerX || e.layerX == 0) {
@@ -210,7 +226,7 @@ export default function PuzzleImage() {
                 pieceHeight
             );
         }
-
+        //Drag puzzle
         function onPuzzleClick(e) {
             if (e.layerX || e.layerX === 0) {
                 mouse.x = e.layerX - canvas.offsetLeft;
@@ -245,14 +261,14 @@ export default function PuzzleImage() {
                 document.onpointerup = pieceDropped;
             }
         }
-
+        //game over
         function gameOver() {
             document.onpointerdown = null;
             document.onpointermove = null;
             document.onpointerup = null;
             initPuzzle();
         }
-
+        //drop puzzle
         function pieceDropped(e) {
             document.onpointermove = null;
             document.onpointerup = null;
@@ -268,7 +284,7 @@ export default function PuzzleImage() {
             }
             resetPuzzleAndCheckWin();
         }
-
+        //Reset when done
         function resetPuzzleAndCheckWin() {
             stage.clearRect(0, 0, puzzleWidth, puzzleHeight);
             let gameWin = true;
@@ -295,8 +311,10 @@ export default function PuzzleImage() {
                 }
             }
             if (gameWin) {
-                createTitle("Welcome to the AK's Team");
-                setTimeout(gameOver, 3000);
+                // console.log("Welcome to the AK's Team --->");
+                // createTitle("Welcome to the AK's Team");
+                setModalState(true);
+                setTimeout(gameOver, 200);
             }
         }
 
@@ -311,7 +329,7 @@ export default function PuzzleImage() {
             );
             return o;
         }
-
+        //Grid size
         function updateDifficulty(e) {
             difficulty = e.target.value;
             pieceWidth = Math.floor(img.width / difficulty);
@@ -321,28 +339,57 @@ export default function PuzzleImage() {
             gameOver();
         }
         document.querySelector("#GridSize").oninput = updateDifficulty;
-    }, []);
+    };
+    const [seconds, setSeconds] = useState(0);
+    const [isActive, setIsActive] = useState(false);
 
+    function toggle() {
+        setIsActive(!isActive);
+        const time = document.getElementById("timer");
+        time.style.display = "block";
+
+        const startTime = document.getElementById("start");
+        startTime.style.opacity = 0;
+    }
+
+    function reset() {
+        setSeconds(0);
+        setIsActive(false);
+    }
+
+    useEffect(() => {
+        let interval = null;
+        if (isActive) {
+            interval = setInterval(() => {
+                setSeconds((seconds) => seconds + 1);
+            }, 1000);
+        } else if (!isActive && seconds !== 0) {
+            clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+    }, [isActive, seconds]);
     return (
         <>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center w-ful h-screen items-center">
+                {modalState && (
+                    <Modal modalState={modalStateHandler} state={modalState} />
+                )}
                 <div>
                     <div className="flex justify-center my-6">
                         <label className="font-extrabold text-4xl px-4  shadow-xl mr-2 py-4 text-zinc-900">
                             PUZZLE APP
                         </label>
                     </div>
-                    <canvas className="z-1" id="canvas" />
+
                     <br />
                     <div className="z-0">
                         <label className="font-bold text-xl mr-2 text-zinc-500">
                             ENTER PUZZLE SIZE OF GRID :
                         </label>
                         <input
-                            className="input-1   border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
+                            className="input-1  border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
                             type="number"
                             value={value}
-                            min={2}
                             onChange={(e) => {
                                 if (e.target.value > 5) {
                                     return;
@@ -352,6 +399,24 @@ export default function PuzzleImage() {
                             }}
                             id="GridSize"
                         />
+                        <div className="">
+                            <div className="relative ">
+                                <button
+                                    id="start"
+                                    className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1"
+                                    onClick={toggle}
+                                >
+                                    START
+                                </button>
+                                <div
+                                    id="timer"
+                                    className="absolute top-10 hidden left-5 py-3 px-10  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg"
+                                >
+                                    {seconds}s
+                                </div>
+                            </div>
+                        </div>
+                        <canvas className="" id="canvas" />
                     </div>
                 </div>
             </div>
