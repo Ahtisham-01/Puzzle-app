@@ -6,6 +6,7 @@ export default function PuzzleImage() {
     const [value, setValue] = useState(null);
     //Modal state to show when win
     const [modalState, setModalState] = useState(false);
+    const [loader, setLoader] = useState(false);
     //modal Handler
     const modalStateHandler = () => {
         document.querySelector(".modal").classList.remove("flex");
@@ -395,28 +396,35 @@ export default function PuzzleImage() {
                                 if (e.target.value > 5) {
                                     return;
                                 } else {
-                                    setValue(e.target.value);
+                                    {
+                                        setValue(e.target.value);
+                                        setLoader(true);
+                                    }
                                 }
                             }}
                             id="GridSize"
                         />
-                        <div className="">
-                            <div className="relative ">
-                                <button
-                                    id="start"
-                                    className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1"
-                                    onClick={toggle}
-                                >
-                                    START
-                                </button>
-                                <div
-                                    id="timer"
-                                    className="absolute top-0 hidden left-5 py-3 px-10  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg"
-                                >
-                                    {seconds}s
+                        {loader ? (
+                            <div className="">
+                                <div className="relative ">
+                                    <button
+                                        id="start"
+                                        className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1"
+                                        onClick={toggle}
+                                    >
+                                        START
+                                    </button>
+                                    <div
+                                        id="timer"
+                                        className={`absolute top-0 hidden left-5 py-3 px-10  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg`}
+                                    >
+                                        {seconds}s
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : (
+                            ""
+                        )}
                         <canvas className="my-4" id="canvas" />
                     </div>
                 </div>
