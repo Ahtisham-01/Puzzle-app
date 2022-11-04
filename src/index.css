@@ -23,3 +23,8 @@ code {
     width: 400;
     height: 400;
 }
+.bg-hun {
+    background-image: url("../public/images/bgimg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}

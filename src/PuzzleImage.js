@@ -7,6 +7,27 @@ export default function PuzzleImage() {
     //Modal state to show when win
     const [modalState, setModalState] = useState(false);
     const [loader, setLoader] = useState(false);
+    //images state
+    const [immage, setImg] = useState("");
+    const img = new Image();
+    const imgArr = [
+        {
+            id: 1,
+            img: "https://pixabay.com/get/gf864d8309a99c435cbfc822e2a2b0cccae03170bc3c4e1adb415b5e6cb6046f39742a2d5ea7bb25d1660cc712009edae5f440721ba3070e0249eb04c8585a3c2075dab0ef58a3fce14d2d3f7fc984a46_640.jpg",
+        },
+        {
+            id: 2,
+            img: "https://pixabay.com/get/gfa06064ed29ce13494843ffde3d927d88ffebb04571ecf85ed11eb3d535ed8e43b8496a90ac0d53b1d579312bbe7281885abf2ff132cad67d10d7d1135876db1e439ee1ba5d5d1c339ed21ddf7062945_640.jpg",
+        },
+        {
+            id: 3,
+            img: "https://pixabay.com/get/gd0b9ca09523819fb5de01718ef693e8a5596f317f55b28512696e2444a2d1d4e6671325eb4d582f5638d55689ba47066f526dd714a8e1168fd7fd32b953ad8efdb92eaae887c0f7adf0a1d6f71f647f5_640.jpg",
+        },
+        {
+            id: 4,
+            img: "https://pixabay.com/get/gec938856295096fc76aa573ece23857b2b1a614a7b8d459ba48c0af2a110d4285f386f18c746077de5ebd6014b71ea2d4d94d0952769a5bd434f4dc4977a92ba8a61eff8bc52103c77d68c40f478fb01_640.jpg",
+        },
+    ];
     //modal Handler
     const modalStateHandler = () => {
         document.querySelector(".modal").classList.remove("flex");
@@ -15,13 +36,29 @@ export default function PuzzleImage() {
         setValue(null);
         document.getElementById("GridSize").value = "";
     };
+    function images() {
+        setImg("");
+        let randomNu = Math.floor(Math.random() * 4) + 1;
+        console.log(randomNu);
+        let i = imgArr.find((it) => {
+            if (it.id == randomNu) {
+                return it;
+            }
+        });
+        if (i !== undefined) {
+            setImg(i);
+        }
+    }
+    useEffect(() => {
+        images();
+    }, []);
     useEffect(() => {
         canvas();
     }, [value]);
     //creating canvas
     const canvas = () => {
         const PUZZLE_HOVER_TINT = "#009900";
-        const img = new Image();
+
         const canvas = document.querySelector("#canvas");
         const stage = canvas.getContext("2d");
         let difficulty = value;
@@ -34,9 +71,11 @@ export default function PuzzleImage() {
         let currentPiece;
         let currentDropPiece;
         let mouse;
+
         img.addEventListener("load", onImage, true);
-        img.src =
-            "https://cdn.pixabay.com/photo/2022/10/09/02/16/haunted-house-7508035_960_720.jpg";
+        // img.src =
+        //     "https://cdn.pixabay.com/photo/2022/10/09/02/16/haunted-house-7508035_960_720.jpg";
+        img.src = immage.img;
 
         function initPuzzle() {
             pieces = [];
@@ -85,7 +124,7 @@ export default function PuzzleImage() {
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
             setCanvas();
-            // initPuzzle();
+            initPuzzle();
         }
         //create pieces of tiles
         function buildPieces() {
@@ -372,20 +411,20 @@ export default function PuzzleImage() {
     }, [isActive, seconds]);
     return (
         <>
-            <div className="flex justify-center w-ful h-screen items-center">
+            <div className="flex justify-center w-ful h-screen items-center bg-hun">
                 {modalState && (
                     <Modal modalState={modalStateHandler} state={modalState} />
                 )}
                 <div>
                     <div className="flex justify-center my-6">
-                        <label className="font-extrabold text-4xl px-4  shadow-xl mr-2 py-4 text-zinc-900">
-                            PUZZLE APP
+                        <label className="font-extrabold text-4xl px-4  shadow-xl mr-2 py-4 text-zinc-900 bg-white rounded-md">
+                            Task 2: PUZZLE APP
                         </label>
                     </div>
 
                     <br />
                     <div className="z-0">
-                        <label className="font-bold text-xl mr-2 text-zinc-500">
+                        <label className="font-bold text-xl mr-2 text-zinc-900">
                             ENTER PUZZLE SIZE OF GRID :
                         </label>
                         <input
@@ -393,6 +432,7 @@ export default function PuzzleImage() {
                             type="number"
                             value={value}
                             onChange={(e) => {
+                                images();
                                 if (e.target.value > 5) {
                                     return;
                                 } else {
@@ -404,6 +444,19 @@ export default function PuzzleImage() {
                             }}
                             id="GridSize"
                         />
+                        {/* <div>
+                            {" "}
+                            <button
+                                id="start"
+                                className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1"
+                                onClick={() => {
+                                    canvas();
+                                    setLoader(false);
+                                }}
+                            >
+                                reset
+                            </button>
+                        </div> */}
                         {loader ? (
                             <div className="">
                                 <div className="relative ">
