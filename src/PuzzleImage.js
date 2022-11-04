@@ -84,7 +84,7 @@ export default function PuzzleImage() {
       puzzleWidth = pieceWidth * difficulty;
       puzzleHeight = pieceHeight * difficulty;
       setCanvas();
-      //   initPuzzle();
+      initPuzzle();
     }
     //create pieces of tiles
     function buildPieces() {
@@ -327,7 +327,34 @@ export default function PuzzleImage() {
     }
     document.querySelector("#GridSize").oninput = updateDifficulty;
   };
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
+  function toggle() {
+    setIsActive(!isActive);
+    const time = document.getElementById("timer");
+    time.style.display = "block";
+
+    const startTime = document.getElementById("start");
+    startTime.style.opacity = 0;
+  }
+
+  function reset() {
+    setSeconds(0);
+    setIsActive(false);
+  }
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds((seconds) => seconds + 1);
+      }, 1000);
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
   return (
     <>
       <div className="flex justify-center w-ful h-screen items-center">
@@ -340,7 +367,7 @@ export default function PuzzleImage() {
               PUZZLE APP
             </label>
           </div>
-          <canvas className="" id="canvas" />
+
           <br />
           <div className="z-0">
             <label className="font-bold text-xl mr-2 text-zinc-500">
@@ -359,9 +386,33 @@ export default function PuzzleImage() {
               }}
               id="GridSize"
             />
-            <button className="bg-zinc-900 box-border shadow-xl rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1">
+            {/* <button 
+            onClick={toggle}
+            id="start"  className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1">
               Start
             </button>
+            <label className="font-bold text-xl mr-2 text-zinc-500">
+              Timer :
+            </label>
+            <button  id="timer" className="bg-zinc-900 box-border shadow-xl text-center rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1">
+            {seconds}s
+            </button> */}
+            <div className="relative ">
+              <button
+                id="start"
+                className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1"
+                onClick={toggle}
+              >
+                START
+              </button>
+              <div
+                id="timer"
+                className="absolute top-10 hidden left-5 py-3 px-10  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg"
+              >
+                {seconds}s
+              </div>
+            </div>
+            <canvas className="" id="canvas" />
           </div>
         </div>
       </div>
