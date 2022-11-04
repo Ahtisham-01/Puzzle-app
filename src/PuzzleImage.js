@@ -402,13 +402,24 @@ export default function PuzzleImage() {
         let interval = null;
         if (isActive) {
             interval = setInterval(() => {
-                setSeconds((seconds) => seconds + 1);
-            }, 1000);
-        } else if (!isActive && seconds !== 0) {
+                setSeconds((prevTime) => prevTime + 10);
+            }, 10);
+        } else if (!isActive) {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
     }, [isActive, seconds]);
+    // useEffect(() => {
+    //     let interval;
+    //     if (running) {
+    //       interval = setInterval(() => {
+    //         setTime((prevTime) => prevTime + 10);
+    //       }, 10);
+    //     } else if (!running) {
+    //       clearInterval(interval);
+    //     }
+    //     return () => clearInterval(interval);
+    //   }, [running]);
     return (
         <>
             <div className="flex justify-center w-ful h-screen items-center bg-hun">
@@ -469,9 +480,32 @@ export default function PuzzleImage() {
                                     </button>
                                     <div
                                         id="timer"
-                                        className={`absolute top-0 hidden left-5 py-3 px-10  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg`}
+                                        className={`absolute top-0 hidden left-0 py-3 pl-2  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg`}
                                     >
-                                        {seconds}s
+                                        <span className="text-center">
+                                            {(
+                                                "0" +
+                                                Math.floor(
+                                                    (seconds / 60000) % 60
+                                                )
+                                            ).slice(-2)}
+                                            :
+                                        </span>
+                                        <span className="text-center">
+                                            {(
+                                                "0" +
+                                                Math.floor(
+                                                    (seconds / 1000) % 60
+                                                )
+                                            ).slice(-2)}
+                                            :
+                                        </span>
+                                        <span className="text-center">
+                                            {(
+                                                "0" +
+                                                ((seconds / 10) % 100)
+                                            ).slice(-2)}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
