@@ -13,15 +13,15 @@ export default function PuzzleImage() {
     const imgArr = [
         {
             id: 1,
-            img: "../public/images/haunted.jpg",
+            img: "https://pixabay.com/get/gf864d8309a99c435cbfc822e2a2b0cccae03170bc3c4e1adb415b5e6cb6046f39742a2d5ea7bb25d1660cc712009edae5f440721ba3070e0249eb04c8585a3c2075dab0ef58a3fce14d2d3f7fc984a46_640.jpg",
         },
         {
             id: 2,
-            img: "../public/images/batman.jpg",
+            img: "https://pixabay.com/get/gfa06064ed29ce13494843ffde3d927d88ffebb04571ecf85ed11eb3d535ed8e43b8496a90ac0d53b1d579312bbe7281885abf2ff132cad67d10d7d1135876db1e439ee1ba5d5d1c339ed21ddf7062945_640.jpg",
         },
         {
             id: 3,
-            img: "../public/images/natture.jpg",
+            img: "https://pixabay.com/get/gd0b9ca09523819fb5de01718ef693e8a5596f317f55b28512696e2444a2d1d4e6671325eb4d582f5638d55689ba47066f526dd714a8e1168fd7fd32b953ad8efdb92eaae887c0f7adf0a1d6f71f647f5_640.jpg",
         },
         {
             id: 4,
