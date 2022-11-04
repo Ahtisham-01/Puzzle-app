@@ -386,17 +386,6 @@ export default function PuzzleImage() {
               }}
               id="GridSize"
             />
-            {/* <button 
-            onClick={toggle}
-            id="start"  className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1">
-              Start
-            </button>
-            <label className="font-bold text-xl mr-2 text-zinc-500">
-              Timer :
-            </label>
-            <button  id="timer" className="bg-zinc-900 box-border shadow-xl text-center rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1">
-            {seconds}s
-            </button> */}
             <div className="relative ">
               <button
                 id="start"
