@@ -84,7 +84,7 @@ export default function PuzzleImage() {
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
             setCanvas();
-            initPuzzle();
+            // initPuzzle();
         }
         //create pieces of tiles
         function buildPieces() {
@@ -411,13 +411,13 @@ export default function PuzzleImage() {
                                 </button>
                                 <div
                                     id="timer"
-                                    className="absolute top-10 hidden left-5 py-3 px-10  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg"
+                                    className="absolute top-0 hidden left-5 py-3 px-10  bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg"
                                 >
                                     {seconds}s
                                 </div>
                             </div>
                         </div>
-                        <canvas className="" id="canvas" />
+                        <canvas className="my-4" id="canvas" />
                     </div>
                 </div>
             </div>
