@@ -332,16 +332,17 @@ export default function PuzzleImage() {
                             PUZZLE APP
                         </label>
                     </div>
-                    <canvas className="-z-1" id="canvas" />
+                    <canvas className="z-1" id="canvas" />
                     <br />
                     <div className="z-0">
                         <label className="font-bold text-xl mr-2 text-zinc-500">
                             ENTER PUZZLE SIZE OF GRID :
                         </label>
                         <input
-                            className="input-1  border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
+                            className="input-1   border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
                             type="number"
                             value={value}
+                            min={2}
                             onChange={(e) => {
                                 if (e.target.value > 5) {
                                     return;
