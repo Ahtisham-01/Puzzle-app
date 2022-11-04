@@ -314,6 +314,7 @@ export default function PuzzleImage() {
                 // console.log("Welcome to the AK's Team --->");
                 // createTitle("Welcome to the AK's Team");
                 setModalState(true);
+                setIsActive(false);
                 setTimeout(gameOver, 200);
             }
         }
