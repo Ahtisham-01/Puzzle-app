@@ -143,7 +143,7 @@ export default function PuzzleImage() {
                     yPos += pieceHeight;
                 }
             }
-            document.onpointerdown = shufflePuzzle;
+            document.getElementById("start ").onpointerdown = shufflePuzzle;
         }
         //shuffle Grid pieces
         function shufflePuzzle() {
@@ -356,6 +356,9 @@ export default function PuzzleImage() {
                 setModalState(true);
                 setIsActive(false);
                 setTimeout(gameOver, 200);
+                setSeconds((pre) =>
+                    localStorage.setItem("seconds", JSON.stringify(pre))
+                );
             }
         }
 
@@ -409,26 +412,25 @@ export default function PuzzleImage() {
         }
         return () => clearInterval(interval);
     }, [isActive, seconds]);
-    // useEffect(() => {
-    //     let interval;
-    //     if (running) {
-    //       interval = setInterval(() => {
-    //         setTime((prevTime) => prevTime + 10);
-    //       }, 10);
-    //     } else if (!running) {
-    //       clearInterval(interval);
-    //     }
-    //     return () => clearInterval(interval);
-    //   }, [running]);
+
+    // if (loader) {
+    //     JSON.stringify(localStorage.setItem("seconds", seconds));
+    // } else {
+    //     JSON.stringify(localStorage.setItem("seconds", seconds));
+    // }
     return (
         <>
             <div className="flex justify-center w-ful h-screen items-center bg-hun">
                 {modalState && (
-                    <Modal modalState={modalStateHandler} state={modalState} />
+                    <Modal
+                        seconds={seconds}
+                        modalState={modalStateHandler}
+                        state={modalState}
+                    />
                 )}
                 <div>
                     <div className="flex justify-center my-6">
-                        <label className="font-extrabold text-4xl px-4  shadow-xl mr-2 py-4 text-zinc-900 bg-white rounded-md">
+                        <label className="md:font-extrabold md:text-4xl md:px-4 sm:text-xl sm:font-normal  shadow-xl mr-2 py-4 text-zinc-900 bg-white rounded-md">
                             Task 2: PUZZLE APP
                         </label>
                     </div>
@@ -439,7 +441,7 @@ export default function PuzzleImage() {
                             ENTER PUZZLE SIZE OF GRID :
                         </label>
                         <input
-                            className="input-1  border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
+                            className="  border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
                             type="number"
                             value={value}
                             onChange={(e) => {
@@ -470,13 +472,21 @@ export default function PuzzleImage() {
                         </div> */}
                         {loader ? (
                             <div className="">
-                                <div className="relative ">
+                                <div className="relative my-2 ">
                                     <button
                                         id="start"
-                                        className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1"
+                                        className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 px-10 py-3 p-1"
                                         onClick={toggle}
                                     >
                                         START
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            window.location.reload("/")
+                                        }
+                                        className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 px-10 py-3 p-1"
+                                    >
+                                        Change Puzzle
                                     </button>
                                     <div
                                         id="timer"
