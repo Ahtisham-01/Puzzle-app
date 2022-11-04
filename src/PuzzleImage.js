@@ -330,7 +330,7 @@ export default function PuzzleImage() {
 
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center w-ful h-screen items-center">
         {modalState && (
           <Modal modalState={modalStateHandler} state={modalState} />
         )}
