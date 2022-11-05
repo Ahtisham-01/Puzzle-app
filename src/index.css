@@ -28,3 +28,11 @@ code {
     background-size: cover;
     background-repeat: no-repeat;
 }
+@media  (max-width: 768px) {
+#canvas
+{
+    width: 350px;
+    height: 300px;
+}
+}
+    

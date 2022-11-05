@@ -85,26 +85,6 @@ export default function PuzzleImage() {
             };
             currentPiece = null;
             currentDropPiece = null;
-            // stage.drawImage(
-            //     img,
-            //     0,
-            //     0,
-            //     puzzleWidth,
-            //     puzzleHeight,
-            //     0,
-            //     0,
-            //     puzzleWidth,
-            //     puzzleHeight
-            // );
-            // createTitle("Click to Start Puzzle");
-
-            buildPieces();
-        }
-        //canvas initial rebder
-        function setCanvas() {
-            canvas.width = puzzleWidth;
-            canvas.height = puzzleHeight;
-            canvas.style.border = "1px solid black";
             stage.drawImage(
                 img,
                 0,
@@ -116,6 +96,26 @@ export default function PuzzleImage() {
                 puzzleWidth,
                 puzzleHeight
             );
+            // createTitle("Click to Start Puzzle");
+
+            buildPieces();
+        }
+        //canvas initial rebder
+        function setCanvas() {
+            canvas.width = puzzleWidth;
+            canvas.height = puzzleHeight;
+            canvas.style.border = "1px solid black";
+            // stage.drawImage(
+            //     img,
+            //     0,
+            //     0,
+            //     puzzleWidth,
+            //     puzzleHeight,
+            //     0,
+            //     0,
+            //     puzzleWidth,
+            //     puzzleHeight
+            // );
         }
         //image load handler based on grid size
         function onImage() {
@@ -143,7 +143,7 @@ export default function PuzzleImage() {
                     yPos += pieceHeight;
                 }
             }
-            document.getElementById("start ").onpointerdown = shufflePuzzle;
+            document.getElementById("start").onpointerdown = shufflePuzzle;
         }
         //shuffle Grid pieces
         function shufflePuzzle() {
@@ -420,7 +420,7 @@ export default function PuzzleImage() {
     // }
     return (
         <>
-            <div className="flex justify-center w-ful h-screen items-center bg-hun">
+            <div className="flex justify-center w-ful h-screen  bg-hun">
                 {modalState && (
                     <Modal
                         seconds={seconds}
@@ -430,20 +430,22 @@ export default function PuzzleImage() {
                 )}
                 <div>
                     <div className="flex justify-center my-6">
-                        <label className="md:font-extrabold md:text-4xl md:px-4 sm:text-xl sm:font-normal  shadow-xl mr-2 py-4 text-zinc-900 bg-white rounded-md">
+                        <label className="font-extrabold text-4xl  shadow-xl mr-2 py-4 text-zinc-900 bg-white rounded-md">
                             Task 2: PUZZLE APP
                         </label>
                     </div>
 
                     <br />
-                    <div className="z-0">
-                        <label className="font-bold text-xl mr-2 text-zinc-900">
+                    <div className="z-0 ">
+                        <label className="font-bold text-xl mx-8 text-zinc-900">
                             ENTER PUZZLE SIZE OF GRID :
                         </label>
                         <input
-                            className="  border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
+                            className=" mx-8  border border-zinc-500 outline-none h-12 w-80 p-4 shadow-xl rounded-lg"
                             type="number"
                             value={value}
+                            min={2}
+                            required
                             onChange={(e) => {
                                 images();
                                 if (e.target.value > 5) {
@@ -457,26 +459,14 @@ export default function PuzzleImage() {
                             }}
                             id="GridSize"
                         />
-                        {/* <div>
-                            {" "}
-                            <button
-                                id="start"
-                                className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 w-24 h-12 p-1"
-                                onClick={() => {
-                                    canvas();
-                                    setLoader(false);
-                                }}
-                            >
-                                reset
-                            </button>
-                        </div> */}
-                        {loader ? (
-                            <div className="">
+                      
+                        {value ? (
+                            <div className="mx-4">
                                 <div className="relative my-2 ">
                                     <button
                                         id="start"
                                         className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 px-10 py-3 p-1"
-                                        onClick={toggle}
+                                        onClick={toggle} 
                                     >
                                         START
                                     </button>
@@ -522,7 +512,11 @@ export default function PuzzleImage() {
                         ) : (
                             ""
                         )}
-                        <canvas className="my-4" id="canvas" />
+                        <canvas className="my-4 mx-4" id="canvas" />
+                        <img
+                    className="flex justify-center items-center w-54 my-32 object-cover h-24 rounded-md"
+                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Screenshot_2022-11-03_011620-removebg-preview.png"
+                />
                     </div>
                 </div>
             </div>
