@@ -301,12 +301,18 @@ export default function PuzzleImage() {
       document.onpointerdown = null;
       document.onpointermove = null;
       document.onpointerup = null;
+      document.ontouchmove = null;
+      document.ontouchend = null;
+      document.ontouchstart = null;
       initPuzzle();
     }
     //drop puzzle
     function pieceDropped(e) {
       document.onpointermove = null;
       document.onpointerup = null;
+      document.ontouchmove = null;
+      document.ontouchend = null;
+      document.ontouchstart = null;
       if (currentDropPiece !== null) {
         let tmp = {
           xPos: currentPiece.xPos,
