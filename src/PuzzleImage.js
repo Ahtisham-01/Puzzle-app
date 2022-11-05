@@ -460,7 +460,7 @@ export default function PuzzleImage() {
                     </button>
                     <button
                       onClick={() => window.location.reload("/PuzzleImage")}
-                      className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 px-10 py-3 p-1"
+                      className="bg-zinc-900 box-border shadow-xl opacity-100 rounded-lg hover:text-zinc-900 text-white hover:bg-text-zinc-900 font-semibold hover:bg-zinc-300 ml-1.5 px-8 py-3 p-1"
                     >
                       Change Puzzle
                     </button>
