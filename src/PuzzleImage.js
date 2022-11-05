@@ -411,7 +411,7 @@ export default function PuzzleImage() {
   // }
   return (
     <>
-      <div className="flex justify-center items-center w-full h-full  bg-hun">
+      <div className="flex justify-center items-center w-full h-full  ">
         {modalState && (
           <Modal
             seconds={seconds}
@@ -489,7 +489,7 @@ export default function PuzzleImage() {
               )}
               <canvas className="my-4 " id="canvas" />
               <img
-                className="flex justify-center items-center w-54 my-32 object-cover h-24 rounded-md"
+                className="flex justify-center  items-center w-54  object-cover h-24 rounded-md"
                 src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Screenshot_2022-11-03_011620-removebg-preview.png"
               />
             </div>
