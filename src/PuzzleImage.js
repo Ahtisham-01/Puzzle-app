@@ -407,7 +407,7 @@ export default function PuzzleImage() {
   // }
   return (
     <>
-      <div className="flex justify-center items-center w-ful h-screen  bg-hun">
+      <div className="flex justify-center items-center w-ful h-full  bg-hun">
         {modalState && (
           <Modal
             seconds={seconds}
