@@ -24,7 +24,7 @@ export default function PuzzleImage() {
         },
         {
             id: 3,
-            img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/Doge.jpg",
+            img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/superhero-gaac3247e5_640.jpg",
         },
         {
             id: 4,
@@ -122,7 +122,9 @@ export default function PuzzleImage() {
         }
         //image load handler based on grid size
         function onImage() {
-            pieceWidth = Math.floor(img.width / difficulty);
+            pieceWidth = window.matchMedia("(max-width: 768px)").matches
+                ? Math.floor(370 / difficulty)
+                : Math.floor(img.width / difficulty);
             pieceHeight = Math.floor(img.height / difficulty);
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
@@ -381,9 +383,7 @@ export default function PuzzleImage() {
         //Grid size
         function updateDifficulty(e) {
             difficulty = e.target.value;
-            pieceWidth = window.matchMedia("(max-width: 768px)").matches
-                ? Math.floor(370 / difficulty)
-                : Math.floor(img.width / difficulty);
+            pieceWidth = Math.floor(img.width / difficulty);
             pieceHeight = Math.floor(img.height / difficulty);
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
@@ -517,7 +517,9 @@ export default function PuzzleImage() {
                             ) : (
                                 ""
                             )}
-                            <canvas className="my-4 " id="canvas" />
+
+                            <canvas id="canvas" />
+
                             <img
                                 className="flex justify-center  items-center w-54  object-cover h-24 rounded-md"
                                 src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Screenshot_2022-11-03_011620-removebg-preview.png"
