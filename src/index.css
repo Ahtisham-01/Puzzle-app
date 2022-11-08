@@ -50,3 +50,14 @@ code {
         height: 500px;
     }
 }
+.Toastify__toast-theme--light {
+    background: rgb(19, 18, 18) !important;
+}
+
+.Toastify__toast-body {
+    color: white;
+    font-weight: 600;
+}
+
+/* Toastify__toast Toastify__toast-theme--light Toastify__toast--default Toastify__toast--close-on-click */
+/* Toastify__close-button Toastify__close-button--light" */

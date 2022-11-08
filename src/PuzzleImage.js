@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
+import React from "react";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function PuzzleImage() {
     //Set value for input field
     const [value, setValue] = useState(null);
     //Modal state to show when win
     const [modalState, setModalState] = useState(false);
     const [loader, setLoader] = useState(false);
+    const [toaster, setToaster] = useState(false);
+    const notify = () => toast("Congratulation you win!");
     //images state
     const [immage, setImg] = useState("");
     const img = new Image();
@@ -52,6 +58,12 @@ export default function PuzzleImage() {
             setImg(i);
         }
     }
+    useEffect(() => {
+        if (toaster === true) {
+            notify();
+        }
+    }, [toaster]);
+
     useEffect(() => {
         images();
     }, []);
@@ -358,6 +370,7 @@ export default function PuzzleImage() {
                 }
             }
             if (gameWin) {
+                setToaster(true);
                 // console.log("Welcome to the AK's Team --->");
                 // createTitle("Welcome to the AK's Team");
                 setModalState(true);
@@ -428,6 +441,19 @@ export default function PuzzleImage() {
                         seconds={seconds}
                         modalState={modalStateHandler}
                         state={modalState}
+                    />
+                )}
+                {toaster && (
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
                     />
                 )}
                 <div>
@@ -517,6 +543,7 @@ export default function PuzzleImage() {
                             ) : (
                                 ""
                             )}
+                            {/* <button onClick={notify}>Notify!</button> */}
 
                             <canvas id="canvas" />
 
