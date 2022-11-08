@@ -12,8 +12,12 @@ export default function PuzzleImage() {
     const imgArr = [
         {
             id: 1,
-            img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/auto-g4fcd3802d_640.jpg",
+            img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/haunted-img.png",
         },
+        // {
+        //     id: 1,
+        //     img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/auto-g4fcd3802d_640.jpg",
+        // },
         {
             id: 2,
             img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/superhero-gaac3247e5_640.jpg",
