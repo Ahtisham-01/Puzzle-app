@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
-import { Draggable } from "@shopify/draggable";
 export default function PuzzleImage() {
     //Set value for input field
     const [value, setValue] = useState(null);
@@ -173,7 +172,6 @@ export default function PuzzleImage() {
                 }
             }
             document.onpointerdown = onPuzzleClick;
-            document.ontouchstart = onPuzzleClick;
         }
         //check the piece is draged or not
         function checkPieceClicked() {
@@ -300,8 +298,6 @@ export default function PuzzleImage() {
                 stage.restore();
                 document.onpointermove = updatePuzzle;
                 document.onpointerup = pieceDropped;
-                document.ontouchmove = updatePuzzle;
-                document.ontouchend = pieceDropped;
             }
         }
         //game over
@@ -316,9 +312,6 @@ export default function PuzzleImage() {
         function pieceDropped(e) {
             document.onpointermove = null;
             document.onpointerup = null;
-            document.ontouchmove = null;
-            document.ontouchend = null;
-            document.ontouchstart = null;
 
             if (currentDropPiece !== null) {
                 let tmp = {
