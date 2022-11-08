@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 body {
-    touch-action: none;
+    /* touch-action: none; */
 
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -27,6 +27,7 @@ code {
 #canvas {
     width: 400;
     height: 400;
+    touch-action: none;
 }
 .bg-hun {
     background-image: url("../public/images/bgimg.png");
@@ -37,5 +38,11 @@ code {
     #canvas {
         width: 350px;
         height: 300px;
+    }
+}
+@media (min-width: 768px) {
+    #canvas {
+        width: 750px;
+        height: 700px;
     }
 }
