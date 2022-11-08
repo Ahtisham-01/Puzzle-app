@@ -398,8 +398,12 @@ export default function PuzzleImage() {
         //Grid size
         function updateDifficulty(e) {
             difficulty = e.target.value;
-            pieceWidth = Math.floor(img.width / difficulty);
-            pieceHeight = Math.floor(img.height / difficulty);
+            pieceWidth = window.matchMedia("(max-width: 768px)").matches
+                ? Math.floor(370 / difficulty)
+                : Math.floor(img.width / difficulty);
+            pieceHeight = window.matchMedia("(max-width: 768px)").matches
+                ? Math.floor(300 / difficulty)
+                : Math.floor(img.width / difficulty);
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
             gameOver();
