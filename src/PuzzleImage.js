@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import React from "react";
-
+import { useReward } from "react-rewards";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function PuzzleImage() {
@@ -12,8 +12,10 @@ export default function PuzzleImage() {
     const [loader, setLoader] = useState(false);
     const [toaster, setToaster] = useState(false);
     const notify = () => toast("Congratulation you win!");
+    const [welcomeConfitte, setWelcomeConfitte] = useState(false);
     //images state
     const [immage, setImg] = useState("");
+
     const img = new Image();
     const imgArr = [
         // {
@@ -139,7 +141,7 @@ export default function PuzzleImage() {
                 : Math.floor(img.width / difficulty);
             pieceHeight = window.matchMedia("(max-width: 768px)").matches
                 ? Math.floor(300 / difficulty)
-                : Math.floor(img.width / difficulty);
+                : Math.floor(img.height / difficulty);
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
             setCanvas();
@@ -376,6 +378,7 @@ export default function PuzzleImage() {
                 // console.log("Welcome to the AK's Team --->");
                 // createTitle("Welcome to the AK's Team");
                 setModalState(true);
+                setWelcomeConfitte(true);
                 setIsActive(false);
                 setTimeout(gameOver, 200);
                 setSeconds((pre) =>
@@ -439,9 +442,31 @@ export default function PuzzleImage() {
         return () => clearInterval(interval);
     }, [isActive, seconds]);
 
+    const config = {
+        elementCount: 200,
+        elementSize: 8,
+        spread: 150,
+        zIndex: 9999,
+        lifetime: 500,
+        startVelocity: 30,
+    };
+    useEffect(() => {
+        if (welcomeConfitte === true) {
+            confettiReward();
+            setTimeout(() => {
+                setModalState(true);
+            }, 500);
+        }
+    }, [welcomeConfitte]);
+    const { reward: confettiReward, isAnimating: isConfettiAnimating } =
+        useReward("confettiReward", "confetti", config);
     return (
         <>
             <div className="flex justify-center items-center w-full h-screen  ">
+                <span
+                    id="confettiReward"
+                    className="z-[100] flex justify-center items-center"
+                />
                 {modalState && (
                     <Modal
                         seconds={seconds}
