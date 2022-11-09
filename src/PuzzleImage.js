@@ -36,6 +36,10 @@ export default function PuzzleImage() {
         },
     ];
     const imgArr = [
+        // {
+        //     id: 1,
+        //     img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/haunted-img.png",
+        // },
         {
             id: 1,
             img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/auto-g4fcd3802d_640.jpg",
@@ -163,7 +167,9 @@ export default function PuzzleImage() {
         }
         //image load handler based on grid size
         function onImage() {
-            pieceWidth = Math.floor(img.width / difficulty);
+            pieceWidth = window.matchMedia("(max-width: 768px)").matches
+                ? Math.floor(370 / difficulty)
+                : Math.floor(img.width / difficulty);
             pieceHeight = Math.floor(img.height / difficulty);
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
