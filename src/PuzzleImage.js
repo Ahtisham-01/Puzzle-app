@@ -563,7 +563,7 @@ export default function PuzzleImage() {
                                         </button>
                                         <div
                                             id="timer"
-                                            className={`absolute top-0 hidden left-0 py-3   bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg`}
+                                            className={`absolute top-0 hidden left-0 py-3  text-center bg-slate-400 border-slate-800 w-[100px] text-xl font-bold rounded-lg`}
                                         >
                                             <span className="text-center">
                                                 {(
