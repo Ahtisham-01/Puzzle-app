@@ -32,7 +32,7 @@ export default function PuzzleImage() {
         },
         {
             id: 4,
-            img: "./super-heroes-3349031_960_720.jpg",
+            img: "./super-heroes.jpg",
         },
     ];
     const imgArr = [
@@ -74,14 +74,7 @@ export default function PuzzleImage() {
         } else {
             imagfind(imgArr, randomNu);
         }
-        let i = imgArr.find((it) => {
-            if (it.id == randomNu) {
-                return it;
-            }
-        });
-        if (i !== undefined) {
-            setImg(i);
-        }
+        // }
     }
     useEffect(() => {
         if (toaster === true) {
@@ -167,9 +160,7 @@ export default function PuzzleImage() {
         }
         //image load handler based on grid size
         function onImage() {
-            pieceWidth = window.matchMedia("(max-width: 768px)").matches
-                ? Math.floor(370 / difficulty)
-                : Math.floor(img.width / difficulty);
+            pieceWidth = Math.floor(img.width / difficulty);
             pieceHeight = Math.floor(img.height / difficulty);
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;

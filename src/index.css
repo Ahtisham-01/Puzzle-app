@@ -32,11 +32,11 @@ code {
     background-size: cover;
     background-repeat: no-repeat;
 }
-@media (max-width: 768px) {
+@media (max-width: 548px) {
     #canvas {
         width: 350px;
         height: 300px;
-        touch-action: none;
+        /* touch-action: none; */
     }
 }
 /* @media (min-width: 768px) {
@@ -45,10 +45,10 @@ code {
         height: 700px;
     }
 } */
-@media (min-width: 768px) {
+@media (min-width: 548px) {
     #canvas {
-        width: 700px;
-        height: 500px;
+        width: 750px;
+        height: 700px;
     }
 }
 .Toastify__toast-theme--light {
