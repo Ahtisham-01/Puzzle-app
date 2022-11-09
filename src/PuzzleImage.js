@@ -17,11 +17,25 @@ export default function PuzzleImage() {
     const [immage, setImg] = useState("");
 
     const img = new Image();
+    const imgArr2 = [
+        {
+            id: 1,
+            img: "./download.jpg",
+        },
+        {
+            id: 2,
+            img: "./car.jpg",
+        },
+        {
+            id: 3,
+            img: "./haunted-house-gef57fe0af_1920.jpg",
+        },
+        {
+            id: 4,
+            img: "./super-heroes-3349031_960_720.jpg",
+        },
+    ];
     const imgArr = [
-        // {
-        //     id: 1,
-        //     img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/haunted-img.png",
-        // },
         {
             id: 1,
             img: "https://tuk-cdn.s3.amazonaws.com/can-uploader/auto-g4fcd3802d_640.jpg",
@@ -47,10 +61,15 @@ export default function PuzzleImage() {
         setValue(null);
         document.getElementById("GridSize").value = "";
     };
+
     function images() {
         setImg("");
         let randomNu = Math.floor(Math.random() * 4) + 1;
-        console.log(randomNu);
+        if (window.matchMedia("(max-width: 548px)").matches) {
+            imagfind(imgArr2, randomNu);
+        } else {
+            imagfind(imgArr, randomNu);
+        }
         let i = imgArr.find((it) => {
             if (it.id == randomNu) {
                 return it;
@@ -65,6 +84,13 @@ export default function PuzzleImage() {
             notify();
         }
     }, [toaster]);
+    function imagfind(params, randomNu) {
+        params.find((it) => {
+            if (it.id == randomNu) {
+                setImg(it);
+            }
+        });
+    }
 
     useEffect(() => {
         images();
@@ -92,6 +118,7 @@ export default function PuzzleImage() {
         img.addEventListener("load", onImage, true);
         // img.src =
         //     "https://cdn.pixabay.com/photo/2022/10/09/02/16/haunted-house-7508035_960_720.jpg";
+        // img.src = "./download.jpg";
         img.src = immage.img;
 
         function initPuzzle() {
@@ -136,12 +163,8 @@ export default function PuzzleImage() {
         }
         //image load handler based on grid size
         function onImage() {
-            pieceWidth = window.matchMedia("(max-width: 768px)").matches
-                ? Math.floor(370 / difficulty)
-                : Math.floor(img.width / difficulty);
-            pieceHeight = window.matchMedia("(max-width: 768px)").matches
-                ? Math.floor(300 / difficulty)
-                : Math.floor(img.height / difficulty);
+            pieceWidth = Math.floor(img.width / difficulty);
+            pieceHeight = Math.floor(img.height / difficulty);
             puzzleWidth = pieceWidth * difficulty;
             puzzleHeight = pieceHeight * difficulty;
             setCanvas();
